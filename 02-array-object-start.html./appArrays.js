@@ -80,7 +80,7 @@ function getNoteTemplate(note) {
             >
                 <span class="${note.completed ? 'text-decoration-line-through' : ''}">${note.title}</span>
                 <span>
-                <span class="btn btn-small btn-success">&check;</span>
+                <span class="btn btn-small btn-${note.completed ? 'warning' : 'success'}">&check;</span>
                 <span class="btn btn-small btn-danger">&times;</span>
               </span>
             </li>
