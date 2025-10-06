@@ -62,23 +62,44 @@ const notes = [
 ]
 
 function render() {
-    // for (let i = 0; i < notes.length; i++) {
-    //     listElement.insertAdjacentHTML('beforeend', getNoteTemplate(notes[i]))
-    // }
-
-    for (let note of notes) {
-        listElement.insertAdjacentHTML('beforeend', getNoteTemplate(note))
+    listElement.innerHTML = ''
+    if(notes.length === 0){
+        listElement.innerHTML = `<p>Нет элементов</p>`
     }
+    for (let i = 0; i < notes.length; i++) {
+        listElement.insertAdjacentHTML('beforeend', getNoteTemplate(notes[i], i))
+    }
+
+
+    // for (let note of notes) {
+    //     listElement.insertAdjacentHTML('beforeend', getNoteTemplate(note))
+    // }
 }
 
 render()
 
-function getNoteTemplate(note) {
+listElement.onclick = function (event) {
+    if (event.target.dataset.index) {
+        const index = parseInt(event.target.dataset.index)
+        const type = event.target.dataset.type
+
+        if (type === 'toggle') {
+            notes[index].completed = !notes[index].completed
+        } else if (type === 'remove') {
+            notes.slice(index, 1)
+        }
+
+        render()
+    }
+}
+
+function getNoteTemplate(note, index) {
     return `
         <li
         class="list-group-item d-flex justify-content-between align-items-center"
             >
-                <span class="${note.completed ? 'text-decoration-line-through' : ''}">${note.title}</span>
+                <span class="${note.completed ? 'text-decoration-line-through' : ''}"
+                data-index="${index}">${note.title}</span>
                 <span>
                 <span class="btn btn-small btn-${note.completed ? 'warning' : 'success'}">&check;</span>
                 <span class="btn btn-small btn-danger">&times;</span>
@@ -95,8 +116,7 @@ createBtn.onclick = function () {
         title: inputElement.value,
         completed: false
     }
-    listElement.insertAdjacentHTML('beforeend',
-        getNoteTemplate(newNote)
-    )
+    notes.push(newNote)
+    render()
     inputElement.value = ''
 }
