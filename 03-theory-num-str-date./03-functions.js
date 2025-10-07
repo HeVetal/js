@@ -38,10 +38,24 @@
 //
 //function pow2 = (num, exp) => Math.pow(num, exp)
 
-const sum = (a = 40, b = a /2) => a + b
+// const sum = (a = 40, b = a / 2) => a + b
+//
+// function sumAll(...numbers) {
+//     // let res = 0
+//     // for( let num of numbers ) {
+//     //     res += num
+//     // }
+//     // return res
+//     return numbers.reduce((acc, cur) => (acc += cur), 0)
+// }
 
-function sumAll(... numbers){
-    let res = 0
+// Closures
 
-    return res
-}
+// function createPerson(name) {
+//     return function (lastname) {
+//         console.log(name + ' ' + lastname);
+//     }
+// }
+//
+// const addLastName = createPerson('Vetal')
+// addLastName('sdd')
