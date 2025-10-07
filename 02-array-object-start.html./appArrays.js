@@ -63,7 +63,7 @@ const notes = [
 
 function render() {
     listElement.innerHTML = ''
-    if(notes.length === 0){
+    if (notes.length === 0) {
         listElement.innerHTML = `<p>Нет элементов</p>`
     }
     for (let i = 0; i < notes.length; i++) {
@@ -98,11 +98,13 @@ function getNoteTemplate(note, index) {
         <li
         class="list-group-item d-flex justify-content-between align-items-center"
             >
-                <span class="${note.completed ? 'text-decoration-line-through' : ''}"
-                data-index="${index}">${note.title}</span>
+                <span class="${note.completed ? 'text-decoration-line-through' : ''}">${note.title}</span>
                 <span>
-                <span class="btn btn-small btn-${note.completed ? 'warning' : 'success'}">&check;</span>
-                <span class="btn btn-small btn-danger">&times;</span>
+                <span class="btn btn-small btn-${
+                    note.completed ? 'warning' : 'success'
+                }" data-index="${index}" data-type="toggle">&check;</span>
+                <span class="btn btn-small btn-danger" data-type="remove" 
+                data-index="${index}">&times;</span>
               </span>
             </li>
             `
