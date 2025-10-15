@@ -26,3 +26,4 @@ myEmitter.once('off', () => {
 })
 
 myEmitter.emit('off')
+myEmitter.emit('off')
