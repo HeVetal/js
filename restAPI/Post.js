@@ -1,23 +1,40 @@
-// import {Client} from "pg";
-// import {DataTypes} from 'sequelize'
+import {Sequelize, DataTypes, Model} from "sequelize";
 
-// const Post = new client.Schema({
-//     author: {type: String, required: true},
-//     title: {type: String, required: true},
-//     content: {type: String, required: true},
-//     picture: {type: String}
-// })
-//
-// export default Client.model('Post', Post);
-import {sequelize} from "./dbjs.js";
-import { DataTypes } from 'sequelize';
+const sequelize = new Sequelize({
+    dialect: 'postgres',
+    host: 'localhost',
+    database: 'postgres',
+    username: 'user',
+    password: 'root',
+    port: 5432,
+    logging: false,
+});
 
+class Post extends Model {
+}
 
-const Post = sequelize.define("Post", {
-    author: {type: DataTypes.STRING, allowNull: false},
-    title: {type: DataTypes.STRING, allowNull: false},
-    content: {type: DataTypes.STRING, allowNull: false},
-    picture: {type: DataTypes.STRING}
-})
+Post.init({
+    author: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    content: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+    },
+    picture: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    }
+}, {
+    sequelize,
+    modelName: 'Post',
+    tableName: 'posts',
+    timestamps: true,
+});
 
 export default Post;
