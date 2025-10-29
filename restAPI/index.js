@@ -1,10 +1,12 @@
 import express from 'express';
 import Post from './Post.js';
 import router from "./router.js";
+import fileUpload from 'express-fileupload';
 
 const PORT = 5000;
 const app = express();
 
+app.use(fileUpload({}));
 app.use(express.json());
 app.use('/api', router);
 
